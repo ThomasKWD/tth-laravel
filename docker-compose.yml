@@ -40,7 +40,7 @@ services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         ports:
-            - 28080:80
+            - 28082:80
         depends_on:
             - mysql
         environment:
