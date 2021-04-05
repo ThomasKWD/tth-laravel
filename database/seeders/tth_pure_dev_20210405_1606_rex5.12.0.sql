@@ -4152,23 +4152,6 @@ INSERT INTO `tth_glossar` VALUES
 /*!40000 ALTER TABLE `tth_glossar` ENABLE KEYS */;
 UNLOCK TABLES;
 
-DROP TABLE IF EXISTS `tth_metabegriffe`;
-CREATE TABLE `tth_metabegriffe` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `typ` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `begriff_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `beschreibung` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-LOCK TABLES `tth_metabegriffe` WRITE;
-/*!40000 ALTER TABLE `tth_metabegriffe` DISABLE KEYS */;
-INSERT INTO `tth_metabegriffe` VALUES 
-  (1,'grobklassifikation','1059','Dies definiert, welcher Begriff als Grobklassifikation-Kennzeichnung eingestellt ist. In der dortigen Begriffs-Definition kann eine nähere Erklärung hinterlegt werden.'),
-  (2,'facette','1924','Dies definiert, welcher Begriff als FACETTE-Kennzeichnung eingestellt ist. In der dortigen Begriffs-Definition kann eine nähere Erklärung hinterlegt werden. Die Zuordnung hat Auswirkungen darauf wie Begriffe editiert werden (dürfen). Zum Beispiel darf eine \"Facette\" keine übergeordneten Begriffe haben und kann nicht gleichzeitig als etwas anderes unter \"Grobgliederung\" gekennzeichnet sein. ');
-/*!40000 ALTER TABLE `tth_metabegriffe` ENABLE KEYS */;
-UNLOCK TABLES;
-
 DROP TABLE IF EXISTS `tth_quellen`;
 CREATE TABLE `tth_quellen` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
