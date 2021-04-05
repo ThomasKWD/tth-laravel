@@ -1,62 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Thesaurus Traditioneller Holzbau (TTH)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Version 1.1 (Laravel)
 
-## About Laravel
+Ein Projekt, initiiert von [Timm Miersch](mailto:timm.miersch@googlemail.com).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Demo: https://tth11.kuehne-webdienste.de
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Dies ist eine [MySQL](https://de.wikipedia.org/wiki/MySQL)-Umsetzung der ursprünglichen Datenbank (MS Access), eingebettet in eine Laravel-basierte Webanwendung.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Sie erlaubt eine flexible Online-Bearbeitung der Daten. Außerdem ist eine benutzerfreundliche Abfrage und Präsentation von Daten der DB ohne Login möglich.
 
-## Learning Laravel
+Das vorliegende System ist der Entwurf einer unabhängigen, redaktionellen Datenbank welche später eine Anbindung an die wissenschaftliche Datenbasis ("xtree.digicult.de") erhalten soll.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tabellenstruktur
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Die meisten Feldnamen wurden geändert, um die Bezeichnungen zu vereinfachen und sie mehr den Konventionen anzupassen. 
 
-## Laravel Sponsors
+* [ ] Welche Konventionen von Museumsdatenbanken sollten beachtet werden??
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Tabelle Wortliste : begriffe
 
-### Premium Partners
+|accdb | mysql|
+|------|-------|
+|ID_Wortlise | id|
+|Begriff | begriff|
+|BegriffDefinition | definition|
+|BegriffGrobgliederung | grobgliederung|
+|ND_Text Quelle | autor_id|
+|QuelleSeite | quelle_seite|
+|ND_Beleg Quellen | quellen_idlist|
+|BegriffsCode | code|
+|ND_BegriffsStatus | begriffsstatus_id|
+|ScopeNotes | notes|
+|Bild | bild|
+|BeziehungenBenutze | benutze|
+|BeziehungenBenutztFür | benutzt_fuer|
+|BeziehungOberbegriff | oberbegriff|
+|BeziehungenUnterbegriff | unterbegriff|
+|BeziehungenVerwanteBegriffe | verwandte_begriffe ||
+|BeziehungenAquivalent | aequivalent|
+|InhaltlicheDatierung | inhaltliche_datierung|
+|HistorischeHintergrund | historischer_hintergrund|
+|ND_Sprache | sprache_id|
+|ND_Region | region_id|
+|ND_SprachStil | sprachstil_id|
+|EigenschaftKategorie | kategorie|
+|Veröffentlichen? | veröffentlichen|
+|noch Bearbeiten | bearbeiten|
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+### Beziehungen (Nodes)
 
-## Contributing
+Die meisten Beziehungen *innerhalb* `tth_begriffe` (Wortliste) sind 1-to-Many-Beziehungen (1:n) oder Many-to-Many-Beziehungen (n:m) mit `tth_begriffe` selbst.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Für die in der folgenden Tabelle aufgelisteten Felder gilt:
 
-## Code of Conduct
+* Das urspüngliche Feld der accdb wird erhalten aber nicht mehr verändert. 
+* Für n:m-Beziehungen wurde eine separate Beziehungstabelle angelegt.
+* mit im [template](./theme/private/redaxo/templates/Basis%20[2]/2.Basis.template.php) implementiertem Werkzeug können die Daten wiederholt aus dem ursprünglichen Feld in die Beziehungstabelle geschrieben werden.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+|Feld|Typ der Beziehung|Beziehungstabelle|
+|---|---|---|
+|grobgliederung|n:m|`tth_begriff_grobgliederung`|
+|benutze|1:n||
+|oberbegriff|n:m|`tth_begriff_oberbegriffe`|
+|unterbegriff|n:m|`tth_begriff_unterbegriffe`|
+|verwandte_begriffe|n:m|`tth_begriff_verwandte`|
+|aequivalent|n:m|`tth_begriff_aequivalente`|
 
-## Security Vulnerabilities
+Die usrprüngliche Beziehung "Benutzt für" wird nicht verwendet. Sie wird aus den durch "Benutze" definierten Beziehungen berechnet.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Die externen Beziehungen in `tth_begriffe` haben teilweise auch zusätzliche Beziehungstabellen erhalten falls erforderlich (n:m).
 
-## License
+|Feld|Tabelle|Typ der Beziehung|Beziehungstabelle|
+|---|---|---|---|
+|autor_id| `tth_autoren`| 1:n ||
+|quellen_idlist| `tth_quellen`| n:m |`tth_begriff_quellen`|
+|begriffsstatus_id| `tth_begriffsstati`| 1:n ||
+|sprache_id| `tth_sprachen`| 1:n ||
+|sprachstil_id| `tth_sprachstile`| 1:n ||
+|region_id| `tth_regionen`| 1:n ||
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Medien
+
+Hier wird eine vereinfachte Sonderform gewählt: Kommagetrennte Liste von Dateinamen. Nachteil: bei Löschen von Bildern Verwaltung kompliziert (aber nur wenn *nicht* Redaxo/YForm - oder ein vergleichbares CMS - die Bildverwaltung kontrolliert).
+
+### YForm 
+
+### Werkzeuge
+
+Konvertieren einzelne n:m-Tabelle
+~~Konvertieren aller n:m-Tabellen~~
+
+### Abfragen (Views)
+
+* Alle Begriffe alphabetisch mit Link (mache bis 4 Spalten)
+* Ein Begriff alle Infos (IDs der Beziehungen müssen als Namen aufgelöst werden)
+* Ein Begriff alle Infos *mi Links*
+* Alle Begriffe für Kriterium aus anderer Tabelle z.B. alle eines Autors
+* Alle Begriffe für Beziehung, z.B. alle für eine Begriff, der eine bestimmte Grobgliederung ist
+
+### Kontrollansichten
+
+~~Inhalte aller n:m-Tabellen (Ansicht der Haupt-Tabellen gibt es ja im Backend)~~
+
+braucht man eigentlich nicht, ist ja nur für Admins und die können in phpMyAdmin schauen.
+
+## Implementation
+
+`README.md` Texte in Unterordnern, die nur die Implementation betreffen, sind in Englisch.
+
+### Datenbank
+
+## Installation
+
+Das Repository stellt das Basis-Verzeichnis einer lauffähigen [Laravel 8.x](https://laravel.com/) Installation dar (Apache, MySQL, PHP entsprechend Erfordernissen von Laravel benötigt).
+
+Eine Anpassung verschiedener Einstellungen in der `.env`-Datei.Es werden Administrator-Kenntnisse von Laravel vorausgesetzt.
