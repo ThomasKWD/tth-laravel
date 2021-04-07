@@ -10,14 +10,16 @@
 	</div>
 
 	<div class="results-wrapper">
-		@forelse ($entitiesForLetter as $entity)
-			{{ $entity->begriff }}
-			@if (!$loop->last)
-				,
-			@endif
-		@empty
-			Keine Suchergebnisse für den Buchstaben "<strong>{{$letter}}</strong>".
-		@endforelse
+		@if ($letter)
+			@forelse ($entitiesForLetter as $entity)
+				{{ $entity->begriff }}
+				@if (!$loop->last)
+					,
+				@endif
+			@empty
+				Keine Suchergebnisse für den Buchstaben "<strong>{{$letter}}</strong>".
+			@endforelse
+		@endif
 	</div>
 
 </x-app-layout>

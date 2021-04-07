@@ -66,3 +66,9 @@ Route::get('/alphabet/{id}', function($id) {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::fallback(function ($route) {
+	return view('page', [
+		'routeUrl' => $route
+	]);
+});

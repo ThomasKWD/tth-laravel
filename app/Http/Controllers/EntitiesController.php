@@ -9,18 +9,15 @@ use App\Models\TEntity as TEntity;
 class EntitiesController extends Controller {
 
 	/** 
-	 * returns all entities as assoc array
-	 * 
-	 * !!! make return only all id,begriff
+	 * returns all values of all entities
 	 */
     public static function getAll() : Collection {
 		return TEntity::orderBy('begriff')->get();
 	}
 
 	/** 
-	 * returns all entities as assoc array
-	 * 
-	 * !!! make return only all id,begriff
+	 * returns all entity names and ids
+
 	 * ! seems not to work, according to var dump it always prints all fields or only begriff
 	 */
     public static function getAllNames() : Collection {
