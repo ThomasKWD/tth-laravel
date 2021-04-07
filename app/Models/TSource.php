@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property TthQuellenAutoren[] $tthQuellenAutorens
  * @property TthQuellenangaben[] $tthQuellenangabens
  */
-class TQuelle extends Model
+class TSource extends Model
 {
     /**
      * The table associated with the model.
@@ -32,19 +32,19 @@ class TQuelle extends Model
      */
     protected $fillable = ['titel', 'isbn', 'jahr', 'kurz', 'autor_id'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tthQuellenAutorens()
-    {
-        return $this->hasMany('App\Models\TthQuellenAutoren', 'quelle_id');
-    }
+    // /**
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    //  */
+    // public function tthQuellenAutorens()
+    // {
+    //     return $this->hasMany('App\Models\TthQuellenAutoren', 'quelle_id');
+    // }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tthQuellenangabens()
-    {
-        return $this->hasMany('App\Models\TthQuellenangaben', 'quelle_id');
-    }
+    // /**
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    //  */
+    // public function tthQuellenangabens()
+    // {
+    //     return $this->hasMany('App\Models\TthQuellenangaben', 'quelle_id');
+    // }
 }
