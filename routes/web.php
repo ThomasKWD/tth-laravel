@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EntitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,53 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// !!! put helper into class?
+function getAllEntities() {
+	return EntitiesController::getAllNames(); 	
+}
+
+/**
+ * all letters except x,y
+ */
+function generateListOfLetters() : array {
+	return ['A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'Z'];
+}
+
+// @php
+// 	// !!! wrong MVC, how to pass the controller or its methods to view?
+// 	$controller = new \App\Http\Controllers\EntitiesController();
+// 	$entities = $controller->getNamesStartingWith('A');
+// @endphp
+
+/**
+ * provides already overview of *all* entities
+ * /// !!! problem all routes do almost the same, we could put helper in all of them
+ * // !!! better put to controller class
+ */
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+		'entities' => getAllEntities(),
+		'entityStrings' => EntitiesController::getAllNamesAsJavaScript()
+	]);
+});
+
+// !!! do i really need 2 routes for with/without id??
+Route::get('/alphabet', function() {
+	return view('alphabet', [
+		'letter' => '',
+		'listOfLetters' => generateListOfLetters(),
+		'entitiesForLetter' => []
+	]);
+});
+
+/** uses first letter of found `id` because id could be anything*/
+Route::get('/alphabet/{id}', function($id) {
+	$letter = strtoupper(substr(strval($id), 0, 1));
+	return view('alphabet', [
+		'letter' => $letter,
+		'listOfLetters' => generateListOfLetters(),
+		'entitiesForLetter' => EntitiesController::getNamesStartingWith($letter)
+	]);
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
