@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection as Collection;
 use App\Models\TEntity as TEntity;
+use Illuminate\View\View;
 
 class EntitiesController extends Controller {
 
@@ -93,5 +94,19 @@ class EntitiesController extends Controller {
 		// if ($found !== NULL) {
 		// 	return 'there is something';
 		// }
+	}
+
+	/**
+	 * return view with data for a list of all entities
+	 * 
+	 * just a helper for the routes
+	 *
+	 */	
+	public static function viewAllEntities() {
+		return view('overview', [
+			'entities' => self::getAllNames(),
+			'entityStrings' => self::getAllNamesAsJavaScript(),
+			'isStartPage' => true
+		]);
 	}
 }

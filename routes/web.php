@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntitiesController;
-use Illuminate\View\View;
+use App\Http\Controllers\AlphabeticalViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,26 +14,6 @@ use Illuminate\View\View;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// !!! put helper into class?
-function getAllEntities() {
-	return EntitiesController::getAllNames(); 	
-}
-
-/**
- * all letters except x,y
- */
-function generateListOfLetters() : array {
-	return ['A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'Z'];
-}
-
-function showAllEntities() : View {
-	return view('welcome', [
-		'entities' => getAllEntities(),
-		'entityStrings' => EntitiesController::getAllNamesAsJavaScript(),
-		'isStartPage' => true
-	]);
-}
 
 // @php
 // 	// !!! wrong MVC, how to pass the controller or its methods to view?
@@ -47,10 +27,10 @@ function showAllEntities() : View {
  *    make array for "normal" pages with nav 
  * // !!! better put to controller class
  */
-Route::get(
-	'/{name}',
-	fn() => showAllEntities()
-)->where('name', 'entity|entities|');
+Route::get('/entities',	function() {return EntitiesController::viewAllEntities();
+});
+// ->where('name', 'entity|entities|'); // omit trailing "|" for not allowing root "/"
+Route::get('/entity', fn() => EntitiesController::viewAllEntities());
 
 Route::get('/entity/{id}', function($id) {
 	// !!! cool sanitize in laravel?:
@@ -63,15 +43,16 @@ Route::get('/entity/{id}', function($id) {
 		]);
 	}
 
-	return showAllEntities();
+	return EntitiesController::showAllEntities();
 });
 
 /** uses first letter of found `id` because id could be anything*/
 Route::get('/alphabet/{id}', function($id) {
 	$letter = strtoupper(substr(strval($id), 0, 1));
+	// !!! stuff this into controller
 	return view('alphabet', [
 		'letter' => $letter,
-		'listOfLetters' => generateListOfLetters(),
+		'listOfLetters' => AlphabeticalViewController::generateListOfLetters(),
 		'entitiesForLetter' => EntitiesController::getNamesStartingWith($letter)
 	]);
 });
@@ -80,7 +61,7 @@ Route::get('/alphabet/{id}', function($id) {
 Route::get('/alphabet', function() {
 	return view('alphabet', [
 		'letter' => '',
-		'listOfLetters' => generateListOfLetters(),
+		'listOfLetters' => AlphabeticalViewController::generateListOfLetters(),
 		'entitiesForLetter' => []
 	]);
 });
@@ -90,7 +71,7 @@ Route::get('/alphabet/{id}', function($id) {
 	$letter = strtoupper(substr(strval($id), 0, 1));
 	return view('alphabet', [
 		'letter' => $letter,
-		'listOfLetters' => generateListOfLetters(),
+		'listOfLetters' => AlphabeticalViewController::generateListOfLetters(),
 		'entitiesForLetter' => EntitiesController::getNamesStartingWith($letter)
 	]);
 });
@@ -98,6 +79,8 @@ Route::get('/alphabet/{id}', function($id) {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/', fn() => view('page',['routeUrl' => ''])); //!must not try to use parameter in closure
 
 Route::fallback(function ($route) {
 	return view('page', [
