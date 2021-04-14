@@ -82,8 +82,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/', fn() => view('page',['routeUrl' => ''])); //!must not try to use parameter in closure
 
-Route::fallback(function ($route) {
-	return view('page', [
-		'routeUrl' => $route
-	]);
-});
+// Route::fallback(function ($route) {
+// 	// !!! must check against array but throw 404 for others
+// 	return view('page', [
+// 		'routeUrl' => $route
+// 	]);
+// });

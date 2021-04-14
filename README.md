@@ -111,8 +111,17 @@ braucht man eigentlich nicht, ist ja nur für Admins und die können in phpMyAdm
 
 ### Datenbank
 
-## Installation
+### Installation
 
 Das Repository stellt das Basis-Verzeichnis einer lauffähigen [Laravel 8.x](https://laravel.com/) Installation dar (Apache, MySQL, PHP entsprechend Erfordernissen von Laravel benötigt).
 
 Eine Anpassung verschiedener Einstellungen in der `.env`-Datei.Es werden Administrator-Kenntnisse von Laravel vorausgesetzt.
+
+### Tests
+
+Separate Test-Suite "Single" in welche neue Tests verschoben werden, wenn der Testcode
+selbst überprüft wird, oder aber nicht alle (DB-zerstörenden) Feature-Tests erwünscht sind.
+
+```
+php artisan test --testsuite=Single
+```
