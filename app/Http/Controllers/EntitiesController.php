@@ -51,4 +51,47 @@ class EntitiesController extends Controller {
 		
 		return $found;
 	}
+
+	/** returns details for an entity ID
+	 * - performs all the useful joins, like old code in tth_rex
+	 * 	public function buildSingleEntityQuery() {
+		$tableAuthors = $this->getTableName('authors');
+		$tableStati = $this->getTableName('states');
+		$tableLanguage = $this->getTableName('languages');
+		$tableRegions = $this->getTableName('regions');
+		$tableStyles = $this->getTableName('languagestyles');
+		$tableEntities = $this->getTableName('entities');
+		
+		// ! b is first alias for $tableEntities, b2 is the second for benutze
+		$query = "SELECT b.begriff,b.id,b.autor_id,$tableAuthors.gnd,b.quelle_seite,b.code,b.definition,b.bild,b.begriffsstatus_id,$tableStati.status,b.notes,b.benutze,b.benutzt_fuer,b.kategorie,b.veroeffentlichen,b.bearbeiten,b.sprache_id,b.sprachstil_id,b.region_id,";
+		$query .= "b2.begriff AS benutze_begriff,CONCAT($tableAuthors.vorname, ' ', $tableAuthors.name) AS autor,";
+		$query .= "$tableLanguage.sprache AS sprache,";
+		$query .= "$tableRegions.region AS region, ";
+		$query .= "$tableStyles.stil AS sprachstil ";
+		$query .= "FROM $tableEntities b ";
+		$query .= "LEFT JOIN $tableAuthors ON b.autor_id = $tableAuthors.id ";
+		$query .= "LEFT JOIN $tableStati ON b.begriffsstatus_id = $tableStati.id ";
+		$query .= "LEFT JOIN $tableLanguage ON b.sprache_id = $tableLanguage.id ";
+		$query .= "LEFT JOIN $tableRegions ON b.region_id = $tableRegions.id ";
+		$query .= "LEFT JOIN $tableStyles ON b.sprachstil_id = $tableStyles.id ";
+		$query .= "LEFT JOIN $tableEntities b2 ON b2.id = b.benutze WHERE b.id = :entityId";
+
+		return $query;
+	}
+	 * - remember: ->first() resolves to NULL when nothing found
+	 * 
+	 *  @return object first row of collection 
+	 *                !!! which type
+	*/
+	public static function getEntity(int $id) {
+		$found = TEntity::select(['id','begriff','definition','code','gnd','notes','bearbeiten','kategorie'])
+		->where('id', $id) // !!! need like clause
+		->get()
+		->first();
+
+		return $found;
+		// if ($found !== NULL) {
+		// 	return 'there is something';
+		// }
+	}
 }
