@@ -4,8 +4,6 @@ Version 1.1 (Laravel)
 
 Ein Projekt, initiiert von [Timm Miersch](mailto:timm.miersch@googlemail.com).
 
-Demo: https://tth11.kuehne-webdienste.de
-
 Dies ist eine [MySQL](https://de.wikipedia.org/wiki/MySQL)-Umsetzung der ursprünglichen Datenbank (MS Access), eingebettet in eine Laravel-basierte Webanwendung.
 
 Sie erlaubt eine flexible Online-Bearbeitung der Daten. Außerdem ist eine benutzerfreundliche Abfrage und Präsentation von Daten der DB ohne Login möglich.
@@ -106,8 +104,6 @@ Konvertieren einzelne n:m-Tabelle
 braucht man eigentlich nicht, ist ja nur für Admins und die können in phpMyAdmin schauen.
 
 ## Implementation
-
-`README.md` Texte in Unterordnern, die nur die Implementation betreffen, sind in Englisch.
 
 ### Datenbank
 
