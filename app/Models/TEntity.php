@@ -88,12 +88,13 @@ class TEntity extends Model
     //     return $this->belongsTo('App\Models\TthRegionen', 'region_id');
     // }
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tLanguages()
+    public function language()
     {
-        return $this->belongsTo('App\Models\TLanguage', 'sprache_id');
+        return $this->belongsTo(TLanguage::class, 'sprache_id');
     }
 
     // /**

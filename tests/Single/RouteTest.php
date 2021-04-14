@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class RouteSingleTest extends TestCase
+class RouteTest extends TestCase
 {
     /**
      * existence of important routes the app controllers rely on
