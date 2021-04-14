@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 class TLanguageSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
      * id is primary key but must be set because meaning of relations
      *  brake otherwise
      * 

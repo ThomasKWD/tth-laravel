@@ -62,7 +62,43 @@ class TEntity extends Model
     /**
      * @var array
      */
-    protected $fillable = ['begriffsstatus_id', 'benutze', 'sprache_id', 'region_id', 'sprachstil_id', 'begriff', 'definition', 'code', 'notes', 'bild', 'datierung', 'historischer_hintergrund', 'gnd', 'kategorie', 'veroeffentlichen', 'bearbeiten', 'liste_quellenangaben', 'quelle_seite', 'quellen_idlist', 'autor_id', 'aequivalent', 'verwandte_begriffe', 'grobgliederung', 'unterbegriffe', 'oberbegriffe', 'benutzt_fuer'];
+    protected $fillable = [
+        'begriff',
+        'definition',
+        'code',
+        'gnd',
+        'sprache_id',
+
+        'begriffsstatus_id',
+        'region_id',
+        'sprachstil_id', 
+        'benutze',
+        'benutzt_fuer',
+        'bild',
+        'notes',
+        'datierung',
+        'historischer_hintergrund',
+        'kategorie',
+        'veroeffentlichen',
+        'bearbeiten'
+        // 'liste_quellenangaben',
+        // 'quelle_seite',
+        // 'quellen_idlist',
+        // 'autor_id',
+        // 'aequivalent',
+        // 'verwandte_begriffe', 
+        // 'grobgliederung',
+        // 'unterbegriffe',
+        // 'oberbegriffe', 
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function language()
+    {
+        return $this->belongsTo(TLanguage::class, 'sprache_id');
+    }
 
     // /**
     //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -89,13 +125,6 @@ class TEntity extends Model
     // }
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function language()
-    {
-        return $this->belongsTo(TLanguage::class, 'sprache_id');
-    }
 
     // /**
     //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
