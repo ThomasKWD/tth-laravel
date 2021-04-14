@@ -21,12 +21,15 @@
         Äquivalenzklasse
         </div>
         <div class="col-sm-6">
-            <h2>{{ $entity['begriff'] }}</h2>
-            (ID: {{ $entity['id']}})<br>
+            <div class="entity-center">
 
-            <p>{!! $entity['definition'] !!}</p>
-            <hr>
-            <p>Attribute:</p>
+                <h2>{{ $entity['begriff'] }}</h2>
+                (ID: {{ $entity['id']}})<br>
+                
+                <p>{!! $entity['definition'] !!}</p>
+                <hr>
+                <p>Sprache: , Sprachstil: , Sprachregion: </p>
+            </div>
         
         </div>
         <div class="col-sm">

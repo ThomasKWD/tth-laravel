@@ -1,4 +1,6 @@
  {{--
+    ! warning: original name of this file: welcome.blade.php
+    !!! check if is still used for login/demo code 
 	original login routes
 	 <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-white">Dashboard</a>
                     @else
@@ -14,12 +16,11 @@
 <x-app-layout :entityStrings="$entityStrings">
 
 @if ($isStartPage)
-		 {{-- !!! start page only --}}
 		<div class="project-logo">
 				<img class="logo-graphics" src="{{asset('tth-logo.png')}}" >
 				<span class="project-title">{{ __('project.title') }}</span>
 		</div>
-		@endif
+@endif
 
     <div class="row">
         <div class="col">

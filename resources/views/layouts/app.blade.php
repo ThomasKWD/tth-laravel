@@ -68,7 +68,7 @@
         <span class="footer-item text-muted"> 
 		{{-- !!! how handle project global vars?? --}}
 		<a href="mailto:email@thesaurus-traditioneller-holzbau.net">email@thesaurus-traditioneller-holzbau.net</a></span>
-        <span class="footer-item text-muted"><a href="/">Impressum</a></span>
+        <span class="footer-item text-muted"><a href="/privacy-policy">Datenschutz</a> | <a href="/terms-of-service">Impressum</a></span>
       </div>
     </footer>
 
