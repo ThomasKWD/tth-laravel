@@ -19,7 +19,8 @@ class CreateEntitiesTable extends Migration
             $table->text('definition');
             $table->string('code'); // can contain symbols, e.g. '.' or '_'
             $table->string('gnd'); // is number but may contain spaces and hyphens
-            // *** define relation to sprache (foreign key)
+            // no constraints so far!
+            $table->foreign('sprache_id')->references('id')->on('tth_sprachen');
             $table->timestamps(); 
         });
     }
