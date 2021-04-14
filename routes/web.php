@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntitiesController;
+use Illuminate\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,13 @@ function generateListOfLetters() : array {
 	return ['A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'Z'];
 }
 
+function showAllEntities() : View {
+	return view('welcome', [
+		'entities' => getAllEntities(),
+		'entityStrings' => EntitiesController::getAllNamesAsJavaScript()
+	]);
+}
+
 // @php
 // 	// !!! wrong MVC, how to pass the controller or its methods to view?
 // 	$controller = new \App\Http\Controllers\EntitiesController();
@@ -35,16 +43,39 @@ function generateListOfLetters() : array {
 /**
  * provides already overview of *all* entities
  * /// !!! problem all routes do almost the same, we could put helper in all of them
+ *    make array for "normal" pages with nav 
  * // !!! better put to controller class
  */
-Route::get('/', function () {
-    return view('welcome', [
-		'entities' => getAllEntities(),
-		'entityStrings' => EntitiesController::getAllNamesAsJavaScript()
+Route::get(
+	'/{name}',
+	fn() => showAllEntities()
+)->where('name', 'entity|entities|'); //add as many as possible separated by |
+
+Route::get('/entity/{id}', function($id) {
+	// !!! cool sanitize in laravel?:
+	$saniId = intval($id);
+	if ($saniId > 0) {
+
+		return view('entitydetails', [
+			'entityId' => $saniId,
+			'entity' => EntitiesController::getEntity($saniId)
+		]);
+	}
+
+	return showAllEntities();
+});
+
+/** uses first letter of found `id` because id could be anything*/
+Route::get('/alphabet/{id}', function($id) {
+	$letter = strtoupper(substr(strval($id), 0, 1));
+	return view('alphabet', [
+		'letter' => $letter,
+		'listOfLetters' => generateListOfLetters(),
+		'entitiesForLetter' => EntitiesController::getNamesStartingWith($letter)
 	]);
 });
 
-// !!! do i really need 2 routes for with/without id??
+// !!! how to combine with next block, use helper function!
 Route::get('/alphabet', function() {
 	return view('alphabet', [
 		'letter' => '',
