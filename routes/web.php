@@ -30,7 +30,8 @@ function generateListOfLetters() : array {
 function showAllEntities() : View {
 	return view('welcome', [
 		'entities' => getAllEntities(),
-		'entityStrings' => EntitiesController::getAllNamesAsJavaScript()
+		'entityStrings' => EntitiesController::getAllNamesAsJavaScript(),
+		'isStartPage' => true
 	]);
 }
 
@@ -49,7 +50,7 @@ function showAllEntities() : View {
 Route::get(
 	'/{name}',
 	fn() => showAllEntities()
-)->where('name', 'entity|entities|'); //add as many as possible separated by |
+)->where('name', 'entity|entities|');
 
 Route::get('/entity/{id}', function($id) {
 	// !!! cool sanitize in laravel?:

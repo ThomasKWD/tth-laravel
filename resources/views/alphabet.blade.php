@@ -12,7 +12,7 @@
 	<div class="results-wrapper">
 		@if ($letter)
 			@forelse ($entitiesForLetter as $entity)
-				{{ $entity->begriff }}
+				<a href="/entity/{{$entity->id}}">{{ $entity->begriff }}</a>
 				@if (!$loop->last)
 					,
 				@endif

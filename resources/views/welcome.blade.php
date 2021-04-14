@@ -12,8 +12,27 @@
 
 {{-- entityStrings passing not working, it seems that *always* sanitize (like htmlantities) performed --}}
 <x-app-layout :entityStrings="$entityStrings">
-	@foreach ($entities as $entity)
-		{{-- {{ $entity->begriff }} , {{$entity->id}} -- --}}
-		{{ $entity->begriff }},
-	@endforeach
+
+@if ($isStartPage)
+		 {{-- !!! start page only --}}
+		<div class="project-logo">
+				<img class="logo-graphics" src="{{asset('tth-logo.png')}}" >
+				<span class="project-title">{{ __('project.title') }}</span>
+		</div>
+		@endif
+
+    <div class="row">
+        <div class="col">
+        <!-- this could be component!! -->
+            @foreach ($entities as $entity)
+                {{-- {{ $entity->begriff }} , {{$entity->id}} -- --}}
+                <!-- !!! better to read route base name? -->
+                <!-- !!! still web routes are view related -->
+                <a href="/entity/{{$entity->id}}">{{ $entity->begriff }}</a>
+                @if (!$loop->last)
+					,&nbsp;
+				@endif
+            @endforeach
+        </div>
+    </div>
 </x-app-layout>

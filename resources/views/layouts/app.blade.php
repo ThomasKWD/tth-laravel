@@ -23,7 +23,7 @@
 
   <body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="/"><img class="logo-graphics" src="{{asset('tth-logo.png')}}" alt="Logo mit übereinanderliegenden Buchstaben TTH, in Braun und Schwarz" width="55" height="55" >@{{ __(ProjectTitel) }}</a>
+			<a class="navbar-brand" href="/"><img class="logo-graphics" src="{{asset('tth-logo.png')}}" alt="Logo mit übereinanderliegenden Buchstaben TTH, in Braun und Schwarz" width="55" height="55" >{{ __('project.title') }}</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    	<span class="navbar-toggler-icon"></span>
   			</button>
@@ -51,14 +51,8 @@
 
 	<div class="container main-container">
 
-		{{-- !!! start page only --}}
-		<div class="project-logo">
-				<img class="logo-graphics" src="{{asset('tth-logo.png')}}" >
-				<span class="project-title">@{{ProjektTitel}}</span>
-		</div>
-
 		{{-- !!! page title --}}
-		<h1>Thesaurus</h1>
+		<!-- <h1>Thesaurus</h1> -->
 
 		{{-- !!! blog logic ideas see tth-rex --}}
 
