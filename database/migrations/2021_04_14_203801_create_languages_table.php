@@ -9,7 +9,9 @@ class CreateLanguagesTable extends Migration
     /**
      * Run the migrations.
      * 
+     * increments field is not important, the ids are fix anyway for existing languages
      * Index in sprache name is not important but good for demo.
+     * 
      * Timestamps actually not needed, when we have history tables.
      * @return void
      */

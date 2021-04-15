@@ -1,4 +1,5 @@
 <?php
+// !!! useless
 
 namespace Database\Factories;
 

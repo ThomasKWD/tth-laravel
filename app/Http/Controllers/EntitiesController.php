@@ -85,15 +85,7 @@ class EntitiesController extends Controller {
 	 *                !!! which type
 	*/
 	public static function getEntity(int $id) {
-		$found = TEntity::select(['id','begriff','definition','code','gnd','notes','bearbeiten','kategorie'])
-		->where('id', $id) // !!! need like clause
-		->get()
-		->first();
-
-		return $found;
-		// if ($found !== NULL) {
-		// 	return 'there is something';
-		// }
+		return TEntity::find($id);
 	}
 
 	/**

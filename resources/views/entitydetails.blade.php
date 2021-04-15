@@ -28,7 +28,8 @@
                 
                 <p>{!! $entity['definition'] !!}</p>
                 <hr>
-                <p>Sprache: , Sprachstil: , Sprachregion: </p>
+                {{-- both allowed: $entity->language->sprache, $entity['language']['sprache'] --}}
+                <p>Sprache: {{ $entity->language->sprache }}, Sprachstil: , Sprachregion: </p>
             </div>
         
         </div>

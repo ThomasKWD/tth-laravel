@@ -13,7 +13,14 @@ class TEntitySeeder extends Seeder
     public function run()
     {
         DB::table('tth_wortliste')->insert([
-            ['id' => 645, 'begriff' => 'Abbund', 'definition' => 'Dies ist ein wichtiger Vorgang.'],
+            [
+                'id' => 645,
+                'begriff' => 'Abbund',
+                'definition' => 'Dies ist ein wichtiger Vorgang.',
+                'code' => '',
+                'gnd' => '',
+                'sprache_id' => 2
+            ]
         ]);
     }
 }
