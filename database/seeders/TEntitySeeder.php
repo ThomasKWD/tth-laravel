@@ -19,7 +19,8 @@ class TEntitySeeder extends Seeder
                 'definition' => 'Dies ist ein wichtiger Vorgang.',
                 'code' => '',
                 'gnd' => '',
-                'sprache_id' => 2
+                'sprache_id' => 1,
+                'sprachstil_id' => 2
             ]
         ]);
     }

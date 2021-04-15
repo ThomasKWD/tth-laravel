@@ -4,52 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @property int $id
- * @property int $begriffsstatus_id
- * @property int $benutze
- * @property int $sprache_id
- * @property int $region_id
- * @property int $sprachstil_id
- * @property string $begriff
- * @property string $definition
- * @property string $code
- * @property string $notes
- * @property string $bild
- * @property string $datierung
- * @property string $historischer_hintergrund
- * @property string $gnd
- * @property string $kategorie
- * @property string $veroeffentlichen
- * @property string $bearbeiten
- * @property string $liste_quellenangaben
- * @property int $quelle_seite
- * @property string $quellen_idlist
- * @property int $autor_id
- * @property string $aequivalent
- * @property string $verwandte_begriffe
- * @property string $grobgliederung
- * @property string $unterbegriffe
- * @property string $oberbegriffe
- * @property string $benutzt_fuer
- * @property TthBegriffsstati $tthBegriffsstati
- * @property TthWortliste $tthWortliste
- * @property TthRegionen $tthRegionen
- * @property TthSprachen $tthSprachen
- * @property TthSprachstile $tthSprachstile
- * @property TthBegriffAequivalente[] $tthBegriffAequivalentes
- * @property TthBegriffAequivalente[] $tthBegriffAequivalentes
- * @property TthBegriffGrobgliederung[] $tthBegriffGrobgliederungs
- * @property TthBegriffGrobgliederung[] $tthBegriffGrobgliederungs
- * @property TthBegriffOberbegriffe[] $tthBegriffOberbegriffes
- * @property TthBegriffOberbegriffe[] $tthBegriffOberbegriffes
- * @property TthBegriffTag[] $tthBegriffTags
- * @property TthBegriffUnterbegriffe[] $tthBegriffUnterbegriffes
- * @property TthBegriffUnterbegriffe[] $tthBegriffUnterbegriffes
- * @property TthBegriffVerwandte[] $tthBegriffVerwandtes
- * @property TthBegriffVerwandte[] $tthBegriffVerwandtes
- * @property TthQuellenangaben[] $tthQuellenangabens
- */
 class TEntity extends Model
 {
     /**
@@ -68,10 +22,10 @@ class TEntity extends Model
         'code',
         'gnd',
         'sprache_id',
+        'sprachstil_id', 
 
         // 'begriffsstatus_id',
         // 'region_id',
-        // 'sprachstil_id', 
         // 'benutze',
         // 'benutzt_fuer',
         // 'bild',
@@ -98,6 +52,14 @@ class TEntity extends Model
     public function language()
     {
         return $this->belongsTo(TLanguage::class, 'sprache_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function stil()
+    {
+        return $this->belongsTo(TLanguageStyle::class, 'sprachstil_id');
     }
 
     // /**
