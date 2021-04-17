@@ -9,27 +9,31 @@ class CreateEntitiesTable extends Migration
     /**
      * Defines the main entity table
      * 
+     * ! language not nullable means always required
+     * 
+     * !!! in which case does `$table->id();` suffice
+     * 
       * @return void
      */
     public function up()
     {
         Schema::create('tth_wortliste', function (Blueprint $table) {
-            // $table->id(); // !!! test if suffices
             $table->increments('id');
             $table->string('begriff')->index();
             $table->text('definition');
             $table->string('code'); // can contain symbols, e.g. '.' or '_'
             $table->string('gnd'); // is numeric but may contain spaces and hyphens
-
+            
             $table->unsignedBigInteger('sprache_id');
             // no constraints so far!
             $table->foreign('sprache_id')->references('id')->on('tth_sprachen');
-
-            $table->unsignedBigInteger('sprachstil_id');
+            
+            // $table->integer('country_id')->nullable()->unsigned();
+            $table->unsignedBigInteger('sprachstil_id')->nullable();
             // no constraints so far!
             $table->foreign('sprachstil_id')->references('id')->on('tth_sprachstile');
 
-            $table->unsignedBigInteger('region_id');
+            $table->unsignedBigInteger('region_id')->nullable();
             // no constraints so far!
             $table->foreign('region_id')->references('id')->on('tth_regionen');
             
