@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class TLanguageSeeder extends Seeder
+class TLanguageStyleSeeder extends Seeder
 {
     /**
      * id is primary key but must be set because meaning of relations
@@ -17,7 +17,7 @@ class TLanguageSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tth_sprachen')->insert([
+        DB::table('tth_sprachstile')->insert([
             ['id' => 1, 'stil' => 'Allgemein'],
             ['id' => 2, 'stil' => 'Wissenschaftlich'],
             ['id' => 3, 'stil' => 'Umgangssprachlich'],

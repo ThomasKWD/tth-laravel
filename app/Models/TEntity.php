@@ -23,9 +23,9 @@ class TEntity extends Model
         'gnd',
         'sprache_id',
         'sprachstil_id', 
+        'region_id',
 
         // 'begriffsstatus_id',
-        // 'region_id',
         // 'benutze',
         // 'benutzt_fuer',
         // 'bild',
@@ -47,6 +47,9 @@ class TEntity extends Model
     ];
 
     /**
+     * belongsTo because language is parent table which can be pointed to by
+     * many entities
+     * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function language()
@@ -57,9 +60,17 @@ class TEntity extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function stil()
+    public function style()
     {
         return $this->belongsTo(TLanguageStyle::class, 'sprachstil_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function region()
+    {
+        return $this->belongsTo(TRegion::class, 'region_id');
     }
 
     // /**
@@ -77,16 +88,6 @@ class TEntity extends Model
     // {
     //     return $this->belongsTo('App\Models\TthWortliste', 'benutze');
     // }
-
-    // /**
-    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-    //  */
-    // public function tthRegionen()
-    // {
-    //     return $this->belongsTo('App\Models\TthRegionen', 'region_id');
-    // }
-
-
 
     // /**
     //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

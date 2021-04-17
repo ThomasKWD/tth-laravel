@@ -20,7 +20,8 @@ class TEntitySeeder extends Seeder
                 'code' => '',
                 'gnd' => '',
                 'sprache_id' => 1,
-                'sprachstil_id' => 2
+                'sprachstil_id' => 2,
+                'region_id' => 1 // !!! NULL is better for unset
             ]
         ]);
     }

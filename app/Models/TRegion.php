@@ -6,33 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property string $sprachstil
- * @property TthWortliste[] $tthWortlistes
+ * @property string $region
  */
-class TLanguageStyle extends Model
+class TRegion extends Model
 {
+
     /**
      * The table associated with the model.
      * 
      * @var string
      */
-    protected $table = 'tth_sprachstile';
+    protected $table = 'tth_regionen';
 
     /**
      * @var array
      */
-    protected $fillable = ['stil'];
+    protected $fillable = ['region'];
 
     /**
      * 1:n relation field in TEntities
-     * 
-     * hasMany *here* because this language can have many entities pointing to it
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tEntities()
     {
-        return $this->hasMany(TEntity::class, 'sprachstil_id');
+        return $this->hasMany(TEntity::class, 'region_id');
     }
 }
 

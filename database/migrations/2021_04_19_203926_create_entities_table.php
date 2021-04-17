@@ -28,6 +28,10 @@ class CreateEntitiesTable extends Migration
             $table->unsignedBigInteger('sprachstil_id');
             // no constraints so far!
             $table->foreign('sprachstil_id')->references('id')->on('tth_sprachstile');
+
+            $table->unsignedBigInteger('region_id');
+            // no constraints so far!
+            $table->foreign('region_id')->references('id')->on('tth_regionen');
             
             $table->timestamps();
         });
